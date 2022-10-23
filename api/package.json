@@ -1,0 +1,30 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/derek-oshita/backend.git"
+  },
+  "author": "Derek Oshita",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/derek-oshita/backend/issues"
+  },
+  "homepage": "https://github.com/derek-oshita/backend#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "node-emoji": "^1.11.0",
+    "nodemon": "^2.0.19",
+    "pg": "^8.7.3"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.1"
+  }
+}
