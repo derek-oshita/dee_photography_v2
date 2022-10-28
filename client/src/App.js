@@ -3,6 +3,7 @@ import { ThemeProvider } from '@mui/material/styles';
 
 import { mainTheme } from './styles/themes/main.theme';
 import { LandingView } from './components/view/LandingView';
+import { Registration } from './components/view/Registration';
 import './styles/index.css';
 
 function App() {
@@ -17,7 +18,8 @@ function App() {
       >
         Undertaker
       </Box> */}
-      <LandingView />
+      {/* <LandingView /> */}
+      <Registration />
     </ThemeProvider>
   );
 }
