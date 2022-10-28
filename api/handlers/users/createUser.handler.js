@@ -1,4 +1,5 @@
 const { usersDB } = require('../../database/queries/users');
+const { hashPassword } = require('../../helpers/auth/hashPasswod.helper');
 
 module.exports = async (req, res) => {
   try {
@@ -8,7 +9,8 @@ module.exports = async (req, res) => {
       throw new Error('Please submit a valid email and password');
     }
 
-    const newUser = await usersDB.createUser(email, password, name);
+    const hashedPassword = hashPassword(password);
+    const newUser = await usersDB.createUser(email, hashedPassword, name);
 
     return res.status(201).json(newUser);
   } catch (err) {

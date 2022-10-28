@@ -2,6 +2,7 @@ const express = require('express');
 const { usersDB } = require('../database/queries/users');
 
 const router = express.Router();
+const originalURL = process.env.LOCAL_API_URL;
 
 router.get('/', (req, res) => {
   res.send('TAKE THE RED PILL...');
