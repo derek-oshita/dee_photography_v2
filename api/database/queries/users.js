@@ -29,6 +29,22 @@ class Users {
     });
   };
 
+  // Get a user by email address
+  getUserByEmailAddress = (userEmailAddress) => {
+    return new Promise((resolve, reject) => {
+      connectionPool.query(
+        'SELECT * FROM users WHERE email = $1',
+        [userEmailAddress],
+        (err, data) => {
+          if (err) {
+            reject(err);
+          }
+          resolve(data.rows[0]);
+        },
+      );
+    });
+  };
+
   // Create user
   createUser = (email, password, name) => {
     return new Promise((resolve, reject) => {

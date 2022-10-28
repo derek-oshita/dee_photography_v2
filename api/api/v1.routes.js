@@ -8,9 +8,12 @@ router.get('/', (req, res) => {
   res.send('TAKE THE RED PILL...');
 });
 
+// Auth Routes
+router.post('/auth/register', require('../handlers/auth/register.handler'));
+router.post('/auth/login', require('../handlers/auth/login.handler'));
+
 // User Routes
 router.get('/users', require('../handlers/users/getUsers.handler'));
-router.post('/users', require('../handlers/users/createUser.handler'));
 router.get('/users/:id', require('../handlers/users/getUserByID.handler'));
 router.put('/users/:id', require('../handlers/users/updateUser.handler'));
 router.delete('/users/:id', require('../handlers/users/deleteUser.handler'));
