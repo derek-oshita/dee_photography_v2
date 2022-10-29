@@ -13,8 +13,7 @@ module.exports = async (req, res) => {
 
     if (!isValidPassord) {
       res.statusMessage = 'A user with this email address already exists!';
-      return res.status(400);
-      throw new Error('y');
+      return res.status(400).end();
     }
 
     return res.status(201).json(user);
