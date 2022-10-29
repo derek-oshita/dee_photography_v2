@@ -9,7 +9,7 @@ export const Copyright = (props) => {
       {...props}
     >
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="/">
         Dee Photography
       </Link>{' '}
       {new Date().getFullYear()}

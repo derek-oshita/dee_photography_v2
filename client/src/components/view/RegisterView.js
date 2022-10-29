@@ -6,7 +6,7 @@ import { RegistrationForm } from '../content/RegistrationForm';
  https://github.com/mui/material-ui/tree/v5.10.11/docs/data/material/getting-started/templates/sign-in-side
  */
 
-export const Registration = () => {
+export const RegisterView = () => {
   return (
     <Grid container component="main" sx={{ height: '100vh' }}>
       <RegistrationImage />
