@@ -2,19 +2,20 @@ import { Avatar, TextField, Paper, Box, Grid, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useState } from 'react';
 
-import { LoginLink } from '../trigger/LoginLink';
-import { RegisterButton } from '../trigger/RegisterButton';
+import { Copyright } from '../trigger/Copyright';
+import { RegisterLink } from '../trigger/RegisterLink';
+import { LoginButton } from '../trigger/LoginButton';
 
-export const RegistrationForm = () => {
-  const [registerValues, setRegisterValues] = useState({
+export const LoginForm = () => {
+  const [loginValues, setLoginValues] = useState({
     email: '',
     password: '',
   });
 
   function handleChange(event) {
-    setRegisterValues(() => {
+    setLoginValues(() => {
       return {
-        ...registerValues,
+        ...loginValues,
         [event.target.id]: event.target.value,
       };
     });
@@ -35,7 +36,7 @@ export const RegistrationForm = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Register
+          Login
         </Typography>
         <Box component="form" noValidate sx={{ mt: 1 }}>
           {/* EMAIL */}
@@ -45,9 +46,9 @@ export const RegistrationForm = () => {
             fullWidth
             id="email"
             label="Email Address"
-            name="email"
+            name="email-login"
             autoFocus
-            value={registerValues.email}
+            value={loginValues.email}
             onChange={handleChange}
           />
           {/* PASSWORD */}
@@ -55,16 +56,15 @@ export const RegistrationForm = () => {
             margin="normal"
             required
             fullWidth
-            name="password"
+            name="password-login"
             label="Password"
             type="password"
             id="password"
-            autoComplete="current-password"
-            value={registerValues.password}
+            value={loginValues.password}
             onChange={handleChange}
           />
-          <RegisterButton values={registerValues} />
-          <LoginLink sx={{ mt: 2.5 }} />
+          <LoginButton values={loginValues} />
+          <RegisterLink sx={{ mt: 2.5 }} />
         </Box>
       </Box>
     </Grid>

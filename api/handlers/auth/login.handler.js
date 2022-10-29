@@ -12,11 +12,13 @@ module.exports = async (req, res) => {
     const isValidPassord = compareHash(password, user.password);
 
     if (!isValidPassord) {
-      throw new Error('Invalid credentials!');
+      res.statusMessage = 'A user with this email address already exists!';
+      return res.status(400);
+      throw new Error('y');
     }
 
     return res.status(201).json(user);
   } catch (err) {
-    throw new Error(err);
+    return res.status(400).json(err);
   }
 };

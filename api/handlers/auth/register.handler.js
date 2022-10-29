@@ -7,14 +7,16 @@ module.exports = async (req, res) => {
 
     // Check for an empty registration payload
     if (!email || !password) {
-      throw new Error('Please submit a valid email and password!');
+      res.statusMessage = 'Please submit a valid email and password!';
+      return res.status(400);
     }
 
     // Check to see if a user with that email address already exists
     const existingUser = await usersDB.getUserByEmailAddress(email);
 
     if (existingUser) {
-      throw new Error('A user with this email address already exists!');
+      res.statusMessage = 'A user with this email address already exists!';
+      return res.status(400);
     }
 
     // Hash the password and create a user record
@@ -23,6 +25,6 @@ module.exports = async (req, res) => {
 
     return res.status(201).json(newUser);
   } catch (err) {
-    throw new Error(err);
+    return res.status(400).json(err);
   }
 };
