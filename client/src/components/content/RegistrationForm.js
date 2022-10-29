@@ -7,10 +7,18 @@ import { RegisterButton } from '../trigger/RegisterButton';
 
 export const RegistrationForm = () => {
   const [registerValues, setRegisterValues] = useState({
-    name: '',
     email: '',
     password: '',
   });
+
+  function handleChange(event) {
+    setRegisterValues(() => {
+      return {
+        ...registerValues,
+        [event.target.id]: event.target.value,
+      };
+    });
+  }
 
   return (
     <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
@@ -30,17 +38,6 @@ export const RegistrationForm = () => {
           Register
         </Typography>
         <Box component="form" noValidate sx={{ mt: 1 }}>
-          {/* NAME */}
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            id="name"
-            label="Name"
-            name="email"
-            autoComplete="name"
-            autoFocus
-          />
           {/* EMAIL */}
           <TextField
             margin="normal"
@@ -49,8 +46,9 @@ export const RegistrationForm = () => {
             id="email"
             label="Email Address"
             name="email"
-            autoComplete="email"
             autoFocus
+            value={registerValues.email}
+            onChange={handleChange}
           />
           {/* PASSWORD */}
           <TextField
@@ -62,8 +60,10 @@ export const RegistrationForm = () => {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={registerValues.password}
+            onChange={handleChange}
           />
-          <RegisterButton />
+          <RegisterButton values={registerValues} />
           <Copyright sx={{ mt: 5 }} />
         </Box>
       </Box>

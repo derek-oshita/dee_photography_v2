@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
       throw new Error('Invalid credentials!');
     }
 
-    return res.status(201);
+    return res.status(201).json(user);
   } catch (err) {
     throw new Error(err);
   }
