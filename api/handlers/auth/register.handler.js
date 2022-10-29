@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
     // Check for an empty registration payload
     if (!email || !password) {
       res.statusMessage = 'Please submit a valid email and password!';
-      return res.status(400);
+      return res.status(400).end();
     }
 
     // Check to see if a user with that email address already exists
@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
 
     if (existingUser) {
       res.statusMessage = 'A user with this email address already exists!';
-      return res.status(400);
+      return res.status(400).end();
     }
 
     // Hash the password and create a user record
