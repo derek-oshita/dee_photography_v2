@@ -3,12 +3,12 @@ import LoginIcon from '@mui/icons-material/Login';
 import { useNavigate } from 'react-router-dom';
 
 import { useKeypress } from '../../hooks/keypress.hooks';
-import { API } from '../../services/api.service';
+import { LoginAPI } from '../../services/auth/loginApi.service';
 import { config } from '../../config';
 
 export const LoginButton = (props) => {
   const { email, password } = props.values;
-  const api = new API();
+  const api = new LoginAPI();
   const navigate = useNavigate();
   const enterKeyCode = 13;
 
@@ -21,8 +21,8 @@ export const LoginButton = (props) => {
     api
       .post(url, payload)
       .then((res) => {
-        console.log('res', res);
-        navigate('/dashboard');
+        console.log(res);
+        localStorage.setItem('token', res.token);
       })
       .catch((err) => {
         console.log('err', err);

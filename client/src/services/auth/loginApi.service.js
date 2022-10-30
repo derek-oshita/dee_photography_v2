@@ -1,4 +1,4 @@
-class API {
+class LoginAPI {
   async post(url, payload) {
     const response = await fetch(url, {
       method: 'POST',
@@ -7,9 +7,8 @@ class API {
       },
       body: JSON.stringify(payload),
     });
-
-    return response;
+    return response.json();
   }
 }
 
-export { API };
+export { LoginAPI };

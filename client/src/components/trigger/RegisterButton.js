@@ -1,12 +1,14 @@
 import { Box, Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 import { useKeypress } from '../../hooks/keypress.hooks';
-import { API } from '../../services/api.service';
+import { RegisterAPI } from '../../services/auth/registerApi.service';
 import { config } from '../../config';
 
 export const RegisterButton = (props) => {
   const { email, password } = props.values;
-  const api = new API();
+  const api = new RegisterAPI();
+  const navigate = useNavigate();
   const enterKeyCode = 13;
 
   useKeypress(enterKeyCode, handleClick);
@@ -19,6 +21,7 @@ export const RegisterButton = (props) => {
       .post(url, payload)
       .then((res) => {
         console.log('res', res);
+        navigate('/login');
       })
       .catch((err) => {
         console.log('err', err);
