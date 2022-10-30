@@ -1,5 +1,8 @@
+const jwt = require('jsonwebtoken');
+
 const { usersDB } = require('../../database/queries/users');
 const { compareHash } = require('../../helpers/auth/auth.helper');
+const { config } = require('../../config');
 
 module.exports = async (req, res) => {
   try {
@@ -12,12 +15,18 @@ module.exports = async (req, res) => {
     const isValidPassord = compareHash(password, user.password);
 
     if (!isValidPassord) {
-      res.statusMessage = 'A user with this email address already exists!';
+      res.statusMessage = 'Please enter valid credentials!';
       return res.status(400).end();
     }
 
-    return res.status(201).json(user);
+    const jwtUserData = { userID: user.id, userEmail: user.email };
+    const jwtSecret = config.JWT_SECRET;
+    const jwtExpiration = { expiresIn: '1 days' };
+
+    const token = await jwt.sign(jwtUserData, jwtSecret, jwtExpiration);
+
+    res.status(200).json({ ...jwtUserData, token });
   } catch (err) {
-    return res.status(400).json(err);
+    return res.status(400).json(err).end();
   }
 };
