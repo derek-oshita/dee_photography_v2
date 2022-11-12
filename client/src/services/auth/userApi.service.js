@@ -1,5 +1,5 @@
-class DashboardAPI {
-  async get(url, token) {
+class UserAPI {
+  async getUserByID(url, token) {
     const response = await fetch(url, {
       method: 'GET',
       headers: {
@@ -11,4 +11,4 @@ class DashboardAPI {
   }
 }
 
-export { DashboardAPI };
+export { UserAPI };

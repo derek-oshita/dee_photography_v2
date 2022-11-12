@@ -1,16 +1,21 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
-export const DashboardView = () => {
-  const [currentUser, setCurrentUser] = useState(null);
+import { UserAPI } from '../../services/auth/userApi.service';
+
+export const DashboardView = (props) => {
+  const { currentUser } = props;
   const navigate = useNavigate();
+  const userAPI = new UserAPI();
 
   useEffect(() => {
-    const user = localStorage.getItem('token');
-    if (!user) {
-      navigate('/login');
+    if (currentUser) {
     }
-  }, []);
+  }, [currentUser]);
+
+  const fetchUser = async () => {
+    const data = userAPI;
+  };
 
   return (
     <div>

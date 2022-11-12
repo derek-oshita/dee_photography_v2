@@ -6,7 +6,7 @@ import { Copyright } from '../trigger/Copyright';
 import { RegisterLink } from '../trigger/RegisterLink';
 import { LoginButton } from '../trigger/LoginButton';
 
-export const LoginForm = () => {
+export const LoginForm = (props) => {
   const [loginValues, setLoginValues] = useState({
     email: '',
     password: '',
@@ -65,7 +65,10 @@ export const LoginForm = () => {
             value={loginValues.password}
             onChange={handleChange}
           />
-          <LoginButton values={loginValues} />
+          <LoginButton
+            values={loginValues}
+            setCurrentUser={props.setCurrentUser}
+          />
           <RegisterLink sx={{ mt: 2.5 }} />
         </Box>
       </Box>

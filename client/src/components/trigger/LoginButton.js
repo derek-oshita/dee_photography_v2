@@ -5,13 +5,13 @@ import { useNavigate } from 'react-router-dom';
 
 import { useKeypress } from '../../hooks/keypress.hooks';
 import { LoginAPI } from '../../services/auth/loginApi.service';
-import { config } from '../../config';
 
 export const LoginButton = (props) => {
+  console.log('props.setCurrentUser', props.setCurrentUser);
   const { email, password } = props.values;
   const [isLoading, setIsLoading] = useState(false);
 
-  const api = new LoginAPI();
+  const loginAPI = new LoginAPI();
   const navigate = useNavigate();
   const enterKeyCode = 13;
 
@@ -19,12 +19,13 @@ export const LoginButton = (props) => {
 
   async function handleClick() {
     const payload = { email, password };
-    const url = config.API_URL + '/auth/login';
     setIsLoading(true);
-    await api
-      .post(url, payload)
+    await loginAPI
+      .post(payload)
       .then((res) => {
         localStorage.setItem('token', res.token);
+        localStorage.setItem('userID', res.userID);
+        props.setCurrentUser({ token: res.token, userID: res.userID });
         setIsLoading(false);
         navigate('/dashboard');
       })

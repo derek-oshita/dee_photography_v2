@@ -1,5 +1,8 @@
+import { config } from '../../config';
+
 class LoginAPI {
-  async post(url, payload) {
+  async post(payload) {
+    const url = config.API_URL + '/auth/login';
     const response = await fetch(url, {
       method: 'POST',
       headers: {

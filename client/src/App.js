@@ -1,15 +1,17 @@
-import { Box } from '@mui/material/';
 import { ThemeProvider } from '@mui/material/styles';
-import { RouterProvider } from 'react-router-dom';
+import { useState } from 'react';
 
 import { Router } from './routes/Router';
 import { mainTheme } from './styles/themes/main.theme';
 import './styles/index.css';
 
 function App() {
+  const [currentUser, setCurrentUser] = useState(null);
+  console.log('app currentUser: ', currentUser);
+
   return (
     <ThemeProvider theme={mainTheme}>
-      <RouterProvider router={Router} />
+      <Router currentUser={currentUser} setCurrentUser={setCurrentUser} />
     </ThemeProvider>
   );
 }

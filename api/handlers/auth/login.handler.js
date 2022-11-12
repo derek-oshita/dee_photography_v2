@@ -19,13 +19,14 @@ module.exports = async (req, res) => {
       return res.status(400).end();
     }
 
+    // If the password is valid, sign the token, then pass it in the response along with user data
+    const currentUser = { userID: user.id, email: user.email };
     const jwtSecret = config.JWT_SECRET;
-    const jwtUserData = { userID: user.id, userEmail: user.email };
     const jwtExpiration = { expiresIn: '1 days' };
 
-    const token = await jwt.sign(jwtUserData, jwtSecret, jwtExpiration);
+    const token = await jwt.sign(currentUser, jwtSecret, jwtExpiration);
 
-    res.status(200).json({ ...jwtUserData, token });
+    res.status(200).json({ token, userID: user.id });
   } catch (err) {
     return res.status(400).json(err).end();
   }
