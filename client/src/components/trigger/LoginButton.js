@@ -1,5 +1,6 @@
-import { Box, Button } from '@mui/material';
+import { Box, Button, CircularProgress } from '@mui/material';
 import LoginIcon from '@mui/icons-material/Login';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useKeypress } from '../../hooks/keypress.hooks';
@@ -8,6 +9,8 @@ import { config } from '../../config';
 
 export const LoginButton = (props) => {
   const { email, password } = props.values;
+  const [isLoading, setIsLoading] = useState(false);
+
   const api = new LoginAPI();
   const navigate = useNavigate();
   const enterKeyCode = 13;
@@ -17,27 +20,33 @@ export const LoginButton = (props) => {
   async function handleClick() {
     const payload = { email, password };
     const url = config.API_URL + '/auth/login';
-
-    api
+    setIsLoading(true);
+    await api
       .post(url, payload)
       .then((res) => {
-        console.log(res);
         localStorage.setItem('token', res.token);
+        setIsLoading(false);
+        navigate('/dashboard');
       })
       .catch((err) => {
         console.log('err', err);
+        setIsLoading(false);
       });
   }
 
   return (
     <Box sx={{ textAlign: 'center' }}>
-      <Button
-        onClick={handleClick}
-        variant="contained"
-        sx={{ mt: 3, mb: 2, width: '50%', bgcolor: 'primary.main' }}
-      >
-        Submit <LoginIcon />
-      </Button>
+      {isLoading ? (
+        <CircularProgress color="secondary" />
+      ) : (
+        <Button
+          onClick={handleClick}
+          variant="contained"
+          sx={{ mt: 3, mb: 2, width: '50%', bgcolor: 'primary.main' }}
+        >
+          Submit <LoginIcon />
+        </Button>
+      )}
     </Box>
   );
 };

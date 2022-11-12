@@ -40,21 +40,22 @@ export const RegistrationForm = () => {
         <Box component="form" noValidate sx={{ mt: 1 }}>
           {/* EMAIL */}
           <TextField
-            margin="normal"
             required
             fullWidth
+            autoFocus
+            margin="normal"
+            autoComplete="email-address"
             id="email"
             label="Email Address"
             name="email"
-            autoFocus
             value={registerValues.email}
             onChange={handleChange}
           />
           {/* PASSWORD */}
           <TextField
-            margin="normal"
             required
             fullWidth
+            margin="normal"
             name="password"
             label="Password"
             type="password"

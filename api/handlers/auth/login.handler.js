@@ -19,8 +19,8 @@ module.exports = async (req, res) => {
       return res.status(400).end();
     }
 
-    const jwtUserData = { userID: user.id, userEmail: user.email };
     const jwtSecret = config.JWT_SECRET;
+    const jwtUserData = { userID: user.id, userEmail: user.email };
     const jwtExpiration = { expiresIn: '1 days' };
 
     const token = await jwt.sign(jwtUserData, jwtSecret, jwtExpiration);

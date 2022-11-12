@@ -12,7 +12,9 @@ module.exports = async (req, res) => {
     }
 
     // Check to see if a user with that email address already exists
-    const existingUser = await usersDB.getUserByEmailAddress(email);
+    const existingUser = await usersDB.getUserByEmailAddress(
+      email.toLowerCase(),
+    );
 
     if (existingUser) {
       res.statusMessage = 'A user with this email address already exists!';
