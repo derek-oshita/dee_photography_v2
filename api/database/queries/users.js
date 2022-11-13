@@ -46,11 +46,11 @@ class Users {
   };
 
   // Create user
-  createUser = (email, password) => {
+  createUser = (email, password, name) => {
     return new Promise((resolve, reject) => {
       connectionPool.query(
-        'INSERT INTO users (email, password) VALUES ($1, $2) RETURNING *',
-        [email, password],
+        'INSERT INTO users (email, password, name) VALUES ($1, $2, $3) RETURNING *',
+        [email, password, name],
         (err, data) => {
           if (err) {
             reject(err);

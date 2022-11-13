@@ -3,7 +3,9 @@ const { hashPassword } = require('../../helpers/auth/auth.helper');
 
 module.exports = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, name } = req.body;
+
+    console.log('name', name);
 
     // Check for an empty registration payload
     if (!email || !password) {
@@ -23,7 +25,7 @@ module.exports = async (req, res) => {
 
     // Hash the password and create a user record
     const hashedPassword = hashPassword(password);
-    const newUser = await usersDB.createUser(email, hashedPassword);
+    const newUser = await usersDB.createUser(email, hashedPassword, name);
 
     return res.status(201).json(newUser);
   } catch (err) {

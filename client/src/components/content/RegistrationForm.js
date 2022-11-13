@@ -7,6 +7,7 @@ import { RegisterButton } from '../trigger/RegisterButton';
 
 export const RegistrationForm = () => {
   const [registerValues, setRegisterValues] = useState({
+    name: '',
     email: '',
     password: '',
   });
@@ -38,6 +39,18 @@ export const RegistrationForm = () => {
           Register
         </Typography>
         <Box component="form" noValidate sx={{ mt: 1 }}>
+          {/* Name */}
+          <TextField
+            fullWidth
+            autoFocus
+            margin="normal"
+            autoComplete="name"
+            id="name"
+            label="Name"
+            name="name"
+            value={registerValues.name}
+            onChange={handleChange}
+          />
           {/* EMAIL */}
           <TextField
             required

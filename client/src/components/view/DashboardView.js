@@ -18,18 +18,22 @@ export const DashboardView = (props) => {
     if (currentUser.isLoggedIn && token) {
       fetchUser(currentUser.userID, token);
     }
-  }, [currentUser]);
+  }, [currentUser, token]);
 
   const fetchUser = async (userID, token) => {
     await userAPI
       .getUserByID(userID, token)
       .then((res) => setUserData({ name: res.name, email: res.email }))
-      .catch((err) => console.log('err', err));
+      .catch((err) => navigate('/login'));
+  };
+
+  const renderGreeting = (data) => {
+    return data.name ? data.name : data.email;
   };
 
   return (
     <div>
-      <p>Welcome, {userData?.email}</p>
+      <p>Welcome, {renderGreeting(userData)}</p>
     </div>
   );
 };
