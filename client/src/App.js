@@ -6,9 +6,11 @@ import { mainTheme } from './styles/themes/main.theme';
 import './styles/index.css';
 
 function App() {
-  const [currentUser, setCurrentUser] = useState(null);
-  console.log('app currentUser: ', currentUser);
-
+  const [currentUser, setCurrentUser] = useState({
+    userID: '',
+    token: '',
+    isLoggedIn: false,
+  });
   return (
     <ThemeProvider theme={mainTheme}>
       <Router currentUser={currentUser} setCurrentUser={setCurrentUser} />

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Routes, Route, Redirect } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import { DashboardView } from '../components/view/DashboardView';
 import { LandingView } from '../components/view/LandingView';
@@ -9,11 +9,11 @@ import { RegisterView } from '../components/view/RegisterView';
 export const Router = (props) => {
   const { currentUser, setCurrentUser } = props;
 
-  const renderPageIfLoggedIn = (element) => {
-    if (!currentUser) {
-      return <LoginView />;
+  const renderViewIfLoggedIn = (view) => {
+    if (currentUser.isLoggedIn) {
+      return view;
     }
-    return element;
+    return <Navigate to="/login" replace={true} />;
   };
 
   return (
@@ -28,7 +28,7 @@ export const Router = (props) => {
       {/* Routes that require login */}
       <Route
         path="/dashboard"
-        element={renderPageIfLoggedIn(
+        element={renderViewIfLoggedIn(
           <DashboardView currentUser={currentUser} />,
         )}
       />

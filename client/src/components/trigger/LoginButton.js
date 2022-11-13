@@ -7,7 +7,6 @@ import { useKeypress } from '../../hooks/keypress.hooks';
 import { LoginAPI } from '../../services/auth/loginApi.service';
 
 export const LoginButton = (props) => {
-  console.log('props.setCurrentUser', props.setCurrentUser);
   const { email, password } = props.values;
   const [isLoading, setIsLoading] = useState(false);
 
@@ -25,7 +24,11 @@ export const LoginButton = (props) => {
       .then((res) => {
         localStorage.setItem('token', res.token);
         localStorage.setItem('userID', res.userID);
-        props.setCurrentUser({ token: res.token, userID: res.userID });
+        props.setCurrentUser({
+          token: res.token,
+          userID: res.userID,
+          isLoggedIn: true,
+        });
         setIsLoading(false);
         navigate('/dashboard');
       })

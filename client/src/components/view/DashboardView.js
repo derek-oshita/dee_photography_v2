@@ -5,21 +5,25 @@ import { UserAPI } from '../../services/auth/userApi.service';
 
 export const DashboardView = (props) => {
   const { currentUser } = props;
+  const [userData, setUserData] = useState({});
   const navigate = useNavigate();
   const userAPI = new UserAPI();
 
   useEffect(() => {
-    if (currentUser) {
+    if (currentUser.isLoggedIn) {
+      console.log('currentUser: ', currentUser);
+
+      // fetchUser(currentUser.id, currentUser.token);
     }
   }, [currentUser]);
 
-  const fetchUser = async () => {
-    const data = userAPI;
+  const fetchUser = async (userID, token) => {
+    const data = await userAPI.getUserByID(userID, token);
   };
 
   return (
     <div>
-      <p>Welcome to your Dashboard</p>
+      <p>Welcome, {userData?.email}</p>
     </div>
   );
 };
