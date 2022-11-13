@@ -23,23 +23,29 @@ const compareHash = (pw, dbHash) => {
 /**
  * Middleware that verifies the JWT for protected resources.
  */
-const authRequired = async (req, res, next) => {
-  const token =
-    req.body.token || req.query.token || req.headers['x-access-token'];
 
-  if (!token) {
+const authRequired = async (req, res) => {
+  // Extract the token from the authorization header and remove "Bearer" from string.
+  const requestToken = (
+    req.headers.authorization || req.headers['x-access-token']
+  ).replace(/^Bearer\s+/, '');
+
+  if (!requestToken) {
     return res.status(403).send('A token is required for authentication');
   }
 
   try {
     // Verify the token
-    const decoded = await jwt.verify(token, config.TOKEN_KEY);
-
-    console.log('decoded', decoded);
-
-    req.user = decoded;
+    if (requestToken) {
+      await jwt.verify(requestToken, config.JWT_SECRET, (err, decoded) => {
+        if (err) {
+          throw new Error(err);
+        }
+        req.decoded = decoded;
+      });
+    }
   } catch (err) {
-    return res.status(401).send('Invalid Token');
+    throw new Error(err);
   }
 };
 

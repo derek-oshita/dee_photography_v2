@@ -11,6 +11,7 @@ export const LoginForm = (props) => {
     email: '',
     password: '',
   });
+  const [error, setError] = useState(null);
 
   function handleChange(event) {
     setLoginValues(() => {
@@ -68,6 +69,7 @@ export const LoginForm = (props) => {
           <LoginButton
             values={loginValues}
             setCurrentUser={props.setCurrentUser}
+            setError={setError}
           />
           <RegisterLink sx={{ mt: 2.5 }} />
         </Box>

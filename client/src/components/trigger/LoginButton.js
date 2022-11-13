@@ -22,10 +22,8 @@ export const LoginButton = (props) => {
     await loginAPI
       .post(payload)
       .then((res) => {
-        localStorage.setItem('token', res.token);
-        localStorage.setItem('userID', res.userID);
+        localStorage.setItem('access_token', res.token);
         props.setCurrentUser({
-          token: res.token,
           userID: res.userID,
           isLoggedIn: true,
         });
@@ -33,8 +31,8 @@ export const LoginButton = (props) => {
         navigate('/dashboard');
       })
       .catch((err) => {
-        console.log('err', err);
         setIsLoading(false);
+        props.setError(err);
       });
   }
 

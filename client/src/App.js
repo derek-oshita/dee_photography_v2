@@ -8,9 +8,10 @@ import './styles/index.css';
 function App() {
   const [currentUser, setCurrentUser] = useState({
     userID: '',
-    token: '',
     isLoggedIn: false,
   });
+
+  console.log('currentUser', currentUser);
   return (
     <ThemeProvider theme={mainTheme}>
       <Router currentUser={currentUser} setCurrentUser={setCurrentUser} />

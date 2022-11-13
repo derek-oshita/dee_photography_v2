@@ -20,7 +20,8 @@ module.exports = async (req, res) => {
     }
 
     // If the password is valid, sign the token, then pass it in the response along with user data
-    const currentUser = { userID: user.id, email: user.email };
+    // const currentUser = { userID: user.id, email: user.email };
+    const currentUser = { userID: user.id };
     const jwtSecret = config.JWT_SECRET;
     const jwtExpiration = { expiresIn: '1 days' };
 
@@ -28,6 +29,6 @@ module.exports = async (req, res) => {
 
     res.status(200).json({ token, userID: user.id });
   } catch (err) {
-    return res.status(400).json(err).end();
+    throw new Error(err);
   }
 };
