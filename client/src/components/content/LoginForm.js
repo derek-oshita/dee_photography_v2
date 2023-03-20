@@ -14,8 +14,8 @@ import { RegisterLink } from '../trigger/RegisterLink';
 import { LoginButton } from '../trigger/LoginButton';
 import { useToastAPI } from '../../hooks/useToastAPI.hooks';
 
-import { useToast, immediateToast } from 'izitoast-react';
-import "izitoast-react/dist/iziToast.css";
+// import { useToast, immediateToast } from 'izitoast-react';
+// import "izitoast-react/dist/iziToast.css";
 
 
 export const LoginForm = (props) => {
@@ -26,26 +26,6 @@ export const LoginForm = (props) => {
   const [error, setError] = useState(null);
   const isEmailAddressFieldEmpty = Boolean(error) && loginValues.email.length === 0;
   const isPasswordFieldEmpty = Boolean(error) && loginValues.password.length === 0;
-
-  
-
-
-  const showMessage = useToast({
-    title: "Test",
-    message: "Show my message :)",
-    theme: "light",
-    icon: "warn"
-  });
-
-  useEffect(() => {
-    
-
-    if (error) {
-
-      showMessage()
-      
-    }
-  }, [error]);
 
   function handleChange(event) {
     event.preventDefault();
