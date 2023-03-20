@@ -5,8 +5,6 @@ module.exports = async (req, res) => {
   try {
     const { email, password, name } = req.body;
 
-    console.log('name', name);
-
     // Check for an empty registration payload
     if (!email || !password) {
       res.statusMessage = 'Please submit a valid email and password!';

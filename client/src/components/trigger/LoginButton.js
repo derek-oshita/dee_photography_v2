@@ -1,13 +1,17 @@
-import { Box, Button, CircularProgress } from '@mui/material';
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import CircularProgress from '@mui/material/CircularProgress'
 import LoginIcon from '@mui/icons-material/Login';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+
 import { useKeypress } from '../../hooks/keypress.hooks';
 import { LoginAPI } from '../../services/auth/loginApi.service';
+import { useToastAPI } from '../../hooks/useToastAPI.hooks';
 
 export const LoginButton = (props) => {
-  const { email, password } = props.values;
+  const { email, password, setCurrentUser, setError } = props;
   const [isLoading, setIsLoading] = useState(false);
 
   const loginAPI = new LoginAPI();
@@ -17,13 +21,14 @@ export const LoginButton = (props) => {
   useKeypress(enterKeyCode, handleClick);
 
   async function handleClick() {
-    const payload = { email, password };
+    const payload = { email, password, };
     setIsLoading(true);
+    setError(null)
     await loginAPI
       .post(payload)
       .then((res) => {
         localStorage.setItem('access_token', res.token);
-        props.setCurrentUser({
+        setCurrentUser({
           userID: res.userID,
           isLoggedIn: true,
         });
@@ -31,8 +36,8 @@ export const LoginButton = (props) => {
         navigate('/dashboard');
       })
       .catch((err) => {
+        setError(err.message);
         setIsLoading(false);
-        props.setError(err);
       });
   }
 

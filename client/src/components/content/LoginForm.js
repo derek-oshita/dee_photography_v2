@@ -1,10 +1,22 @@
-import { Avatar, TextField, Paper, Box, Grid, Typography } from '@mui/material';
+import Avatar from '@mui/material/Avatar'
+import TextField from '@mui/material/TextField'
+import Paper from '@mui/material/Paper'
+import Box from '@mui/material/Box'
+import Grid from '@mui/material/Grid'
+import Typography from '@mui/material/Typography'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import { useState } from 'react';
+import FormControl from '@mui/material/FormControl';
+
+import { useState, useEffect } from 'react';
 
 import { Copyright } from '../trigger/Copyright';
 import { RegisterLink } from '../trigger/RegisterLink';
 import { LoginButton } from '../trigger/LoginButton';
+import { useToastAPI } from '../../hooks/useToastAPI.hooks';
+
+import { useToast, immediateToast } from 'izitoast-react';
+import "izitoast-react/dist/iziToast.css";
+
 
 export const LoginForm = (props) => {
   const [loginValues, setLoginValues] = useState({
@@ -12,8 +24,31 @@ export const LoginForm = (props) => {
     password: '',
   });
   const [error, setError] = useState(null);
+  const isEmailAddressFieldEmpty = Boolean(error) && loginValues.email.length === 0;
+  const isPasswordFieldEmpty = Boolean(error) && loginValues.password.length === 0;
+
+  
+
+
+  const showMessage = useToast({
+    title: "Test",
+    message: "Show my message :)",
+    theme: "light",
+    icon: "warn"
+  });
+
+  useEffect(() => {
+    
+
+    if (error) {
+
+      showMessage()
+      
+    }
+  }, [error]);
 
   function handleChange(event) {
+    event.preventDefault();
     setLoginValues(() => {
       return {
         ...loginValues,
@@ -52,6 +87,7 @@ export const LoginForm = (props) => {
             name="email-login"
             value={loginValues.email}
             onChange={handleChange}
+            error={isEmailAddressFieldEmpty}
           />
           {/* PASSWORD */}
           <TextField
@@ -65,9 +101,11 @@ export const LoginForm = (props) => {
             id="password"
             value={loginValues.password}
             onChange={handleChange}
+            error={isPasswordFieldEmpty}
           />
           <LoginButton
-            values={loginValues}
+            email={loginValues.email}
+            password={loginValues.password}
             setCurrentUser={props.setCurrentUser}
             setError={setError}
           />

@@ -6,8 +6,8 @@ import { RegisterAPI } from '../../services/auth/registerApi.service';
 import { config } from '../../config';
 
 export const RegisterButton = (props) => {
-  const { email, password, name } = props.values;
-  const api = new RegisterAPI();
+  const { email, password, name, setError } = props.values;
+  const registerAPI = new RegisterAPI();
   const navigate = useNavigate();
   const enterKeyCode = 13;
 
@@ -17,14 +17,16 @@ export const RegisterButton = (props) => {
     const payload = { email, password, name };
     const url = config.API_URL + '/auth/register';
 
-    api
+    registerAPI
       .post(url, payload)
       .then((res) => {
         // todo: notify of success!
+        console.log(res);
         navigate('/login');
       })
       .catch((err) => {
         console.log('err: ', err);
+        setError(err)
       });
   }
 
