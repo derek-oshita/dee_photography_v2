@@ -5,10 +5,8 @@ import LoginIcon from '@mui/icons-material/Login';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-
 import { useKeypress } from '../../hooks/keypress.hooks';
 import { LoginAPI } from '../../services/auth/loginApi.service';
-import { useToastAPI } from '../../hooks/useToastAPI.hooks';
 
 export const LoginButton = (props) => {
   const { email, password, setCurrentUser, setError } = props;

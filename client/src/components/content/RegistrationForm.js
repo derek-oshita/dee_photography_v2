@@ -12,6 +12,8 @@ export const RegistrationForm = () => {
     password: '',
   });
   const [error, setError] = useState(null);
+  
+  console.log('error ------->', error)
 
   function handleChange(event) {
     setRegisterValues(() => {
@@ -78,7 +80,7 @@ export const RegistrationForm = () => {
             value={registerValues.password}
             onChange={handleChange}
           />
-          <RegisterButton values={registerValues} setError={setError}/>
+          <RegisterButton values={registerValues} onSetError={setError}/>
           <LoginLink sx={{ mt: 2.5 }} />
         </Box>
       </Box>

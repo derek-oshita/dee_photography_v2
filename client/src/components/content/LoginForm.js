@@ -6,17 +6,11 @@ import Grid from '@mui/material/Grid'
 import Typography from '@mui/material/Typography'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import FormControl from '@mui/material/FormControl';
-
 import { useState, useEffect } from 'react';
 
 import { Copyright } from '../trigger/Copyright';
 import { RegisterLink } from '../trigger/RegisterLink';
 import { LoginButton } from '../trigger/LoginButton';
-import { useToastAPI } from '../../hooks/useToastAPI.hooks';
-
-import { useToast, immediateToast } from 'izitoast-react';
-import "izitoast-react/dist/iziToast.css";
-
 
 export const LoginForm = (props) => {
   const [loginValues, setLoginValues] = useState({
@@ -27,25 +21,6 @@ export const LoginForm = (props) => {
   const isEmailAddressFieldEmpty = Boolean(error) && loginValues.email.length === 0;
   const isPasswordFieldEmpty = Boolean(error) && loginValues.password.length === 0;
 
-  
-
-
-  const showMessage = useToast({
-    title: "Test",
-    message: "Show my message :)",
-    theme: "light",
-    icon: "warn"
-  });
-
-  useEffect(() => {
-    
-
-    if (error) {
-
-      showMessage()
-      
-    }
-  }, [error]);
 
   function handleChange(event) {
     event.preventDefault();

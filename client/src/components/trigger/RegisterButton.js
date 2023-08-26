@@ -4,9 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import { useKeypress } from '../../hooks/keypress.hooks';
 import { RegisterAPI } from '../../services/auth/registerApi.service';
 import { config } from '../../config';
+import {useEffect, useState} from "react";
 
-export const RegisterButton = (props) => {
-  const { email, password, name, setError } = props.values;
+export const RegisterButton = ({ values, onSetError}) => {
+  const { email, password, name,  } = values;
   const registerAPI = new RegisterAPI();
   const navigate = useNavigate();
   const enterKeyCode = 13;
@@ -26,7 +27,7 @@ export const RegisterButton = (props) => {
       })
       .catch((err) => {
         console.log('err: ', err);
-        setError(err)
+        onSetError(err)
       });
   }
 

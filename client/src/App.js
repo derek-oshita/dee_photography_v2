@@ -10,6 +10,7 @@ function App() {
     userID: '',
     isLoggedIn: false,
   });
+
   return (
     <ThemeProvider theme={mainTheme}>
       <Router currentUser={currentUser} setCurrentUser={setCurrentUser} />
